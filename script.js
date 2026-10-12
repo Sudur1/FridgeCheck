@@ -47,40 +47,54 @@ function BuildPrompt(usualList) {
   return `You are a grocery assistant. The user's usual grocery list is:
 ${usualList}
 
-Look at the fridge photo. Compare it to the usual list.
-Return ONLY a JSON array of strings with the items from the usual list that are missing or running low in the fridge.
-If you can see other obvious essentials missing, you may add them too.
-No other text.`;
+Look at the fridge photo and do two things:
+1. List every food and drink item you can see in the fridge.
+2. Compare to the usual list and list the usual items that are missing or running low.
+
+Return ONLY JSON in this exact shape, no other text:
+{"scanned": ["item", "item"], "toBuy": ["item", "item"]}`;
 }
 
-function RenderList(items) {
-  ResultList.innerHTML = "";
+function RenderSection(title, items, showCheckboxes) {
+  const header = document.createElement("li");
+  header.className = "SectionTitle";
+  header.textContent = `${title} (${items.length})`;
+  ResultList.appendChild(header);
 
   if (items.length === 0) {
-    SetStatus("Fridge looks stocked. Nothing to buy!");
+    const empty = document.createElement("li");
+    empty.className = "Empty";
+    empty.textContent = "None";
+    ResultList.appendChild(empty);
     return;
   }
 
   items.forEach((item) => {
     const li = document.createElement("li");
     const label = document.createElement("label");
-    const checkbox = document.createElement("input");
     const text = document.createElement("span");
-
-    checkbox.type = "checkbox";
     text.textContent = item;
-
-    checkbox.addEventListener("change", () => {
-      text.classList.toggle("Done", checkbox.checked);
-    });
-
-    label.appendChild(checkbox);
     label.appendChild(text);
+
+    if (showCheckboxes) {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.addEventListener("change", () => {
+        text.classList.toggle("Done", checkbox.checked);
+      });
+      label.prepend(checkbox);
+    }
+
     li.appendChild(label);
     ResultList.appendChild(li);
   });
+}
 
-  SetStatus(`Found ${items.length} item(s) to buy.`);
+function RenderResults(scanned, toBuy) {
+  ResultList.innerHTML = "";
+  RenderSection("Items in your fridge", scanned, false);
+  RenderSection("To buy", toBuy, true);
+  SetStatus(`Scanned ${scanned.length} item(s), ${toBuy.length} to buy.`);
 }
 
 async function AnalyzeFridge() {
@@ -119,11 +133,12 @@ async function AnalyzeFridge() {
       console.log(data);
       return;
     }
+
     const text = data.candidates[0].content.parts[0].text;
     const cleanText = text.replace(/```json|```/g, "").trim();
-    const items = JSON.parse(cleanText);
+    const result = JSON.parse(cleanText);
 
-    RenderList(items);
+    RenderResults(result.scanned || [], result.toBuy || []);
   } catch (error) {
     console.error(error);
     SetStatus("Something went wrong. Check the console.");
