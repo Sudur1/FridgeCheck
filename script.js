@@ -47,9 +47,10 @@ function BuildPrompt(usualList) {
   return `You are a grocery assistant. The user's usual grocery list is:
 ${usualList}
 
-Look at the fridge photo and do two things:
-1. List every food and drink item you can see in the fridge.
-2. Compare to the usual list and list the usual items that are missing or running low.
+Look at the fridge photo carefully.
+1. List every food and drink item you can see, including items inside cartons, bottles, bags, and containers. If you see an egg carton with eggs in it, the item is "Eggs".
+2. Compare to the usual list. An item is NOT missing if you can see it anywhere in the fridge, even inside a container or carton. Match names loosely (for example, an egg carton with eggs counts as "Eggs").
+3. Only put an item in toBuy if you can clearly see it is absent or nearly empty. When unsure, do not add it to toBuy.
 
 Return ONLY JSON in this exact shape, no other text:
 {"scanned": ["item", "item"], "toBuy": ["item", "item"]}`;
