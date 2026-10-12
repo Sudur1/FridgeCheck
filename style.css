@@ -1,0 +1,250 @@
+:root {
+  --Primary: #2563eb;
+  --PrimaryDark: #1d4ed8;
+  --Text: #0f172a;
+  --Muted: #64748b;
+  --Border: #e2e8f0;
+  --Surface: #ffffff;
+  --Background: #f1f5f9;
+  --Success: #16a34a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--Background);
+  color: var(--Text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  background: var(--Surface);
+  border-bottom: 1px solid var(--Border);
+  padding: 16px 24px;
+}
+
+.Brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.Logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--Primary);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.Brand h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.Tagline {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--Muted);
+}
+
+.Container {
+  flex: 1;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.Card {
+  background: var(--Surface);
+  border: 1px solid var(--Border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.StepHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.StepHeader h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.StepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: var(--PrimaryDark);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--Border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--Text);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea:focus {
+  border-color: var(--Primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.FileDrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  color: var(--Muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.FileDrop:hover {
+  border-color: var(--Primary);
+  background: #eff6ff;
+}
+
+.FileDrop input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+#Preview {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  margin: 14px auto 0;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.Btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.Primary {
+  background: var(--Primary);
+  color: #ffffff;
+}
+
+.Primary:hover {
+  background: var(--PrimaryDark);
+}
+
+.Secondary {
+  background: #f8fafc;
+  color: var(--Text);
+  border: 1px solid var(--Border);
+}
+
+.Secondary:hover {
+  background: #f1f5f9;
+}
+
+.Btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.Status {
+  min-height: 1.4em;
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--Muted);
+}
+
+#ResultList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#ResultList li {
+  border-bottom: 1px solid var(--Border);
+}
+
+#ResultList li:last-child {
+  border-bottom: none;
+}
+
+#ResultList label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  cursor: pointer;
+}
+
+#ResultList input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--Primary);
+  cursor: pointer;
+}
+
+#ResultList .Done {
+  text-decoration: line-through;
+  color: var(--Muted);
+}
+
+.Footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.8rem;
+  color: var(--Muted);
+}
+
+@media (max-width: 480px) {
+  .Card {
+    padding: 16px;
+  }
+}

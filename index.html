@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FridgeCheck</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="Header">
+    <div class="Brand">
+      <span class="Logo">FC</span>
+      <div>
+        <h1>FridgeCheck</h1>
+        <p class="Tagline">Snap your fridge. Know what to buy.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="Container">
+    <section class="Card">
+      <div class="StepHeader">
+        <span class="StepNumber">1</span>
+        <h2>Your usual groceries</h2>
+      </div>
+      <textarea id="UsualInput" rows="7" placeholder="One item per line&#10;Milk&#10;Eggs&#10;Bread"></textarea>
+      <button id="SaveUsualBtn" class="Btn Secondary">Save list</button>
+    </section>
+
+    <section class="Card">
+      <div class="StepHeader">
+        <span class="StepNumber">2</span>
+        <h2>Photo of your fridge</h2>
+      </div>
+      <label class="FileDrop" for="FridgeImage">
+        <input type="file" id="FridgeImage" accept="image/*" capture="environment">
+        <span>Tap to take or upload a photo</span>
+      </label>
+      <img id="Preview" alt="Fridge preview" hidden>
+      <button id="AnalyzeBtn" class="Btn Primary">Find what to buy</button>
+      <p id="Status" class="Status"></p>
+    </section>
+
+    <section class="Card">
+      <div class="StepHeader">
+        <span class="StepNumber">3</span>
+        <h2>Shopping list</h2>
+      </div>
+      <ul id="ResultList"></ul>
+    </section>
+  </main>
+
+  <footer class="Footer">FridgeCheck</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
